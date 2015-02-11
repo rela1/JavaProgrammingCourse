@@ -1,0 +1,34 @@
+# Ovaj program ucitava broj od korisnika i ispisuje sljedecih 5 brojeva od toga broja.
+
+		load r0, @poruka1	;ucitavanje prve poruke
+		load r1, @poruka2	;ucitavanje druge poruke
+		load r3, @poruka3	;ucitavanje trece poruke
+		load r15, @novired	;ucitavanje novog reda u registar
+		load r2, @pet		;ucitavanje fiksnog broja 5 za usporedbu
+@petlja1:	echo r0			;ispis prve poruke
+		iinput @broj		;ucitavanje broja
+		jumpIfTrue @ucitan	;ako je uspjesno ucitan, skoci na ucitan
+		echo r1			;ako je neuspjesno ucitan ispisi drugu poruku
+		echo r15		;prijedi u novi red
+		jump @petlja1		;skoci natrag na petlju1 i ucitavanje
+@ucitan:	echo r3			;ispis trece poruke
+		echo r15		;prijedi u novi red
+		load r4, @broj		;ucitaj upisan broj u registar
+		load r5, @nula		;ucitaj nulu u registar
+@petlja:	testEquals r2, r5	;provjeri jesi li ispisao 5 brojeva
+		jumpIfTrue @gotovo	;ako jesi, skoci na kraj
+		increment r4		;uvecaj broj za 1
+		echo r4			;ispisi taj broj
+		echo r15		;prijedi u novi red
+		increment r5		;uvecaj brojac petlje
+		jump @petlja		;vrati se natrag u petlju
+@gotovo:	halt			;zaustavi procesor
+
+# Dodatni podaci
+@poruka1:	DEFSTR "Unesite pocetni broj: "
+@poruka2:	DEFSTR "Unos nije moguce protumaciti kao cijeli broj."
+@poruka3:	DEFSTR "Sljedecih 5 brojeva je:"
+@novired:	DEFSTR "\n"
+@pet:		DEFINT 5
+@nula:		DEFINT 0
+@broj:		DEFINT 0

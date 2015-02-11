@@ -1,0 +1,7 @@
+12	Laptop
+21	Stolno računalo
+22	Projektor
+27	Laserski pokazivač
+29	Bijela ploča
+37	Grafoskop
+38	Zvučnici

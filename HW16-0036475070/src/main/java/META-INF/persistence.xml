@@ -1,0 +1,48 @@
+<persistence xmlns="http://java.sun.com/xml/ns/persistence"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://java.sun.com/xml/ns/persistence http://java.sun.com/xml/ns/persistence/persistence_2_0.xsd"
+	version="2.0">
+	<persistence-unit name="baza.podataka.za.blog"
+		transaction-type="RESOURCE_LOCAL">
+		<provider>org.hibernate.ejb.HibernatePersistence</provider>
+
+		<class>hr.fer.zemris.web.aplikacija5.model.BlogEntry</class>
+		<class>hr.fer.zemris.web.aplikacija5.model.BlogComment</class>
+
+		<shared-cache-mode>ENABLE_SELECTIVE</shared-cache-mode> <!-- NONE, ALL, ENABLE_SELECTIVE, DISABLE_SELECTIVE -->
+
+		<properties>
+
+			<!-- Generalne postavke Hibernate-a -->
+			<!-- ============================== -->
+			<property name="hibernate.archive.autodetection" value="class" />
+			<property name="hibernate.hbm2ddl.auto" value="create-drop" /> <!-- mogućnosti: create, create-drop, update -->
+			<property name="hibernate.format_sql" value="false" /> <!-- kasnije na false -->
+			<property name="hibernate.show_sql" value="false" /> <!-- kasnije na false -->
+
+			<!-- Postavke za spajanje na bazu podataka -->
+			<!-- ===================================== -->
+			<property name="hibernate.connection.driver_class" value="org.apache.derby.jdbc.ClientDriver" />
+			<property name="hibernate.connection.url" value="jdbc:derby://localhost:1527/blogBaza" />
+			<property name="hibernate.connection.useUnicode" value="true" />
+			<property name="hibernate.connection.characterEncoding"
+				value="UTF-8" />
+			<property name="hibernate.connection.username" value="blogDBAdmin" />
+			<property name="hibernate.connection.password" value="blogDBPassword" />
+			<property name="hibernate.dialect" value="org.hibernate.dialect.DerbyTenSevenDialect" />
+
+			<!-- Postavke transakcijskog rada -->
+			<!-- ============================ -->
+			<property name="hibernate.connection.isolation" value="2" /> <!-- isolation level; 2: read_commited, 4: repeatable_read -->
+
+			<!-- Konfiguracija pool-a za bazu podataka -->
+			<!-- ===================================== -->
+			<property name="hibernate.c3p0.min_size" value="5" />
+			<property name="hibernate.c3p0.max_size" value="20" />
+			<property name="hibernate.c3p0.timeout" value="300" />
+			<property name="hibernate.c3p0.max_statements" value="50" />
+			<property name="hibernate.c3p0.idle_test_period" value="3000" />
+
+		</properties>
+	</persistence-unit>
+</persistence>
